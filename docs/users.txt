@@ -1,0 +1,19 @@
+HungerBox Application User Roles
+
+1. Employee
+Employees are the primary users of the HungerBox platform. They use the application to browse cafeteria menus, place food orders, and schedule meal pickups. Employees can also provide feedback on food quality and report issues with orders.
+
+2. Pantry Manager
+Pantry Managers are responsible for managing the cafeteria operations within the HungerBox system. They monitor incoming food orders, manage inventory of food items, and coordinate with kitchen staff to ensure timely preparation and delivery of meals.
+
+3. Vendor
+Vendors represent external food providers who list their menus on the HungerBox platform. Vendors update menu items, set pricing, manage availability of dishes, and process incoming orders placed by employees.
+
+4. Admin
+Administrators oversee the entire HungerBox platform. They manage user accounts, assign roles, monitor system usage, configure cafeterias for different office locations, and handle escalations from vendors or pantry managers.
+
+5. Delivery Staff
+Delivery staff are responsible for transporting prepared food orders from the kitchen or vendor location to designated pickup counters or delivery points inside office campuses. They update delivery status and confirm successful order completion.
+
+6. Finance Operator
+Finance operators handle billing and financial reconciliation for HungerBox operations. They review vendor payouts, track employee meal subsidies, and generate financial reports for corporate clients.

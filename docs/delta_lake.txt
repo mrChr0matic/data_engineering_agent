@@ -1,0 +1,3 @@
+Delta Lake OPTIMIZE compacts small files into larger files to improve query performance.
+
+ZORDER improves data skipping by colocating related information in the same set of files.
