@@ -3,24 +3,8 @@ from agent.graph import build_agent
 from langchain_core.messages import HumanMessage
 from rag import ingest, retriever
 
-def test_llm():
-    llm = get_llm()
-    
-    print("Data Engineering Agent CLI")
-    print("Type 'exit' to quit\n")
-    
-    while True:
-        user_input = input("User: ")
 
-        if user_input.lower() == "exit":
-            break
-
-        response = llm.invoke(user_input)
-
-        print("\nAgent:", response.content)
-        print()
-
-def test_graph():
+def test_agent():
     agent = build_agent()
     
     print("data engineering agent")
@@ -43,5 +27,5 @@ def test_graph():
         print()
 
 if __name__ == "__main__":
-    # ingest.build_vector_store()
-    test_graph()
+    ingest.build_vector_store()
+    # test_agent()

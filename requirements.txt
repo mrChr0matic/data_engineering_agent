@@ -7,3 +7,5 @@ pydantic
 faiss-cpu
 tiktoken
 langchain-community
+langsmith
+duckdb

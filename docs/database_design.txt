@@ -1,0 +1,95 @@
+HungerBox SQL Database Schema
+
+The HungerBox database contains three main tables: USERS, ORDERS, and VENDORS.
+
+Table: USERS
+
+Description:
+The USERS table stores information about people using the HungerBox platform.
+
+Columns:
+- ID (INTEGER, Primary Key)
+  Unique identifier for a user.
+
+- NAME (TEXT)
+  The name of the user.
+
+- ROLE (TEXT)
+  The role of the user in the system.
+  Possible values include:
+  - Employee
+  - Pantry Manager
+  - Vendor
+
+Example rows:
+(1, Alice, Employee)
+(2, Bob, Pantry Manager)
+(3, Charlie, Employee)
+(4, David, Vendor)
+
+
+Table: ORDERS
+
+Description:
+The ORDERS table stores food orders placed by users.
+
+Columns:
+- ID (INTEGER, Primary Key)
+  Unique identifier for an order.
+
+- USER_ID (INTEGER)
+  Foreign key referencing USERS.ID.
+  Indicates which user placed the order.
+
+- ITEM (TEXT)
+  The food item ordered.
+
+- PRICE (REAL)
+  Price of the ordered item.
+
+Example rows:
+(1, 1, Burger, 120)
+(2, 1, Coffee, 40)
+(3, 3, Pizza, 200)
+(4, 3, Pasta, 180)
+
+Relationship:
+USER_ID → USERS.ID
+
+This means each order belongs to a specific user.
+
+
+Table: VENDORS
+
+Description:
+The VENDORS table stores information about food vendors providing items in the HungerBox system.
+
+Columns:
+- ID (INTEGER, Primary Key)
+  Unique vendor identifier.
+
+- NAME (TEXT)
+  Vendor name.
+
+- CUISINE (TEXT)
+  Type of cuisine provided by the vendor.
+
+Example rows:
+(1, FoodHub, Multi Cuisine)
+(2, SpiceKitchen, Indian)
+
+
+Database Relationships
+
+USERS.ID → ORDERS.USER_ID
+
+This relationship means:
+- Each user can place multiple orders.
+- Orders belong to a specific user.
+
+Example SQL Join:
+
+SELECT *
+FROM USERS
+JOIN ORDERS
+ON USERS.ID = ORDERS.USER_ID;
