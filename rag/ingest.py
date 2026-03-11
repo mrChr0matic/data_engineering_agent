@@ -14,8 +14,8 @@ def build_vector_store():
     documents = loader.load()
     
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size = 800,
-        chunk_overlap = 100
+        chunk_size = 250,
+        chunk_overlap = 30
     )
     
     chunks = splitter.split_documents(documents)

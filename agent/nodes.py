@@ -10,6 +10,26 @@ llm_with_tools = llm.bind_tools(tools)
 
 retriever = get_retriever()
 
+
+def router_node(state):
+    question = state['messages'][-1].content
+    prompt = f"""
+    Classify the following query into one of these routes:
+
+    rag: questions about documentation or knowledge
+    sql: questions requiring database queries
+    chat: general conversation
+
+    Query:
+    {question}
+
+    Return only the route name.
+    """
+    route = llm.invoke(prompt).content.strip().lower()
+    
+    return {"route" : route}
+
+
 # def llm_node(state):
 #     messages = state["messages"]
 #     response = llm_with_tools.invoke(messages)

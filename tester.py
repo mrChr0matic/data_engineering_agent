@@ -27,5 +27,5 @@ def test_agent():
         print()
 
 if __name__ == "__main__":
-    ingest.build_vector_store()
-    # test_agent()
+    # ingest.build_vector_store()
+    test_agent()
