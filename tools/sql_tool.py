@@ -11,6 +11,9 @@ def run_sql(query : str) -> str:
     Input should be a valid SQL query string.
     """
     try:
+        query = query.strip()
+        if not query.lower().startswith("select"):
+            return "Error: Only SELECT queries are allowed."
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
         

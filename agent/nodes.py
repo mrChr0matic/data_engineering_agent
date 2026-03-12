@@ -2,32 +2,46 @@ from langchain_core.messages import AIMessage, SystemMessage, ToolMessage
 from llm.azure_openai import get_llm
 from rag.retriever import get_retriever
 from tools.sql_tool import run_sql
+from pydantic import BaseModel
+from typing import Literal
+
+class Route(BaseModel):
+    route : Literal["rag", "sql", "chat"]
 
 llm = get_llm()
 
 tools = [run_sql]
 llm_with_tools = llm.bind_tools(tools)
+router_llm = llm.with_structured_output(Route)
 
 retriever = get_retriever()
 
 
 def router_node(state):
     question = state['messages'][-1].content
-    prompt = f"""
-    Classify the following query into one of these routes:
-
-    rag: questions about documentation or knowledge
-    sql: questions requiring database queries
-    chat: general conversation
-
-    Query:
-    {question}
-
-    Return only the route name.
-    """
-    route = llm.invoke(prompt).content.strip().lower()
     
-    return {"route" : route}
+    prompt = f"""
+        You are a query router for an AI agent.
+
+        Classify the user query into one of the following routes.
+
+        rag:
+        Questions about data you think may not be publicly known.
+
+        sql:
+        Questions requiring data retrieval or aggregation
+        from database tables like users, orders, vendors.
+
+        chat:
+        General conversation or greetings.
+
+        Query:
+        {question}
+    """
+    route = router_llm.invoke(prompt)
+    route_val = route.route
+    print("selected route : ", route_val)
+    return {"route" : route_val}
 
 
 # def llm_node(state):
