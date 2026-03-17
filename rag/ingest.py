@@ -12,14 +12,18 @@ def build_vector_store():
     )
     
     documents = loader.load()
-    
+
+    for doc in documents:
+        doc.metadata["source"] = doc.metadata.get("source", "unknown")
+        doc.metadata["domain"] = "databricks"
+
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size = 250,
-        chunk_overlap = 30
+        chunk_size=800,
+        chunk_overlap=150
     )
-    
+
     chunks = splitter.split_documents(documents)
-    
+        
     embeddings = AzureOpenAIEmbeddings(
         api_key=settings.azure_openai_api_key,
         azure_endpoint=settings.azure_openai_embedding_endpoint,

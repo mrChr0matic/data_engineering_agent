@@ -25,8 +25,9 @@ def build_agent(checkpointer = None):
         {
             'rag' : 'retrieve',
             'sql' : 'retrieve',
+            'databricks' : 'retrieve',
             'chat' : 'llm',
-            'github' : 'llm'
+            'github' : 'llm',
         }
     )
     builder.add_edge("retrieve", "llm")

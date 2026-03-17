@@ -8,7 +8,7 @@ from typing import Literal
 import asyncio
 
 class Route(BaseModel):
-    route: Literal["rag", "sql", "github", "chat"]
+    route: Literal["rag", "sql", "github", "chat", "databricks"]
 
 llm = get_llm()
 
@@ -26,15 +26,28 @@ def router_node(state):
     question = state["messages"][-1].content
 
     prompt = f"""
-        You are a query router for an AI agent.
+        You are a query router for a data engineering AI agent.
 
         Classify the user query into one of these routes:
-        - rag
-        - sql
-        - github
-        - chat
 
-        Return ONLY valid JSON in this format:
+        rag:
+        Questions about documentation or knowledge base.
+
+        sql:
+        Queries requiring database SQL execution.
+
+        github:
+        Questions about GitHub repositories or files.
+
+        databricks:
+        Questions about Databricks, Spark, Delta Lake, Unity Catalog,
+        Medallion architecture, streaming pipelines, or optimization.
+
+        chat:
+        General conversation.
+
+        Return ONLY JSON:
+
         {{"route": "<route>"}}
 
         Query:
@@ -69,21 +82,28 @@ def retrieval_node(state):
     print("User question:", question)
 
     docs = retriever.invoke(question)
-    print(f"Retrieved {len(docs)} document(s)")
+    print("\nRetrieved sources:")
+    for d in docs:
+        print(d.metadata.get("source"))
 
     context = "\n\n".join(doc.page_content for doc in docs)
 
     system_msg = SystemMessage(
-        content=f"""You are a helpful assistant.
-            Use ONLY the information from the provided context to answer the question.
-            Do NOT reveal the context itself.
-            Do NOT output the documents.
-            Do NOT list the retrieved information verbatim.
+        content=f"""
+            You are a Databricks data engineering assistant.
+
+            Use ONLY the information from the provided context.
+
+            Focus on:
+            - Delta Lake
+            - Spark optimization
+            - Medallion architecture
+            - Unity Catalog
 
             Context:
             {context}
         """
-    )
+        )
 
     print("Context injected into system prompt.")
     return {"messages": [system_msg]}

@@ -16,4 +16,10 @@ def get_retriever():
         allow_dangerous_deserialization=True
     )
     
-    return vectorstore.as_retriever(search_kwargs={"k" : 4})
+    return vectorstore.as_retriever(
+        search_type="mmr",
+        search_kwargs={
+            "k": 6,
+            "fetch_k": 12
+        }
+    )
