@@ -1,0 +1,17 @@
+Databricks supports structured streaming.
+
+Streaming pipelines process data continuously.
+
+Example:
+
+spark.readStream
+  .format("cloudFiles")
+  .option("cloudFiles.format", "json")
+  .load("/mnt/raw")
+
+.writeStream
+  .format("delta")
+  .option("checkpointLocation", "/checkpoints/events")
+  .toTable("bronze.events")
+
+Checkpointing ensures fault tolerance.

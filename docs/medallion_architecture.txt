@@ -1,0 +1,28 @@
+The Medallion Architecture is a data design pattern used in Databricks.
+
+It organizes data into layers:
+
+Bronze
+Silver
+Gold
+
+Bronze Layer
+- Raw ingestion
+- Minimal transformation
+- Stores original data
+
+Silver Layer
+- Cleaned data
+- Schema enforcement
+- Deduplication
+
+Gold Layer
+- Business-level aggregates
+- Optimized for analytics
+- Data marts
+
+Example pipeline:
+
+Raw logs → Bronze table
+Bronze → Cleaned events → Silver table
+Silver → Aggregated metrics → Gold table

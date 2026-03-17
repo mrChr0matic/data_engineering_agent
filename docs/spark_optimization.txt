@@ -1,0 +1,23 @@
+Spark performance optimization techniques:
+
+1. Partitioning
+Partition large datasets to improve parallel processing.
+
+Example:
+PARTITION BY date
+
+2. Broadcast joins
+Use broadcast joins for small tables.
+
+3. Avoid wide shuffles
+Reduce data movement across nodes.
+
+4. File sizes
+Optimal file size for Delta tables: 100MB–1GB.
+
+5. ZORDER
+Improves query performance on filtered columns.
+
+Example:
+OPTIMIZE table_name
+ZORDER BY (user_id)

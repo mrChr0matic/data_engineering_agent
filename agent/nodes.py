@@ -1,8 +1,8 @@
 from langchain_core.messages import SystemMessage, ToolMessage
 from llm.azure_openai import get_llm
 from rag.retriever import get_retriever
-from tools.sql_tool import run_sql
-from tools.github_tool import get_github_tools
+from tools.sql.sql_tool import run_sql
+from tools.github.github_tool import get_github_tools
 from pydantic import BaseModel
 from typing import Literal
 import asyncio

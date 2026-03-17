@@ -1,3 +1,28 @@
-Delta Lake OPTIMIZE compacts small files into larger files to improve query performance.
+Delta Lake is an open-source storage layer that brings ACID transactions to data lakes.
 
-ZORDER improves data skipping by colocating related information in the same set of files.
+Key features:
+- ACID transactions
+- Schema enforcement
+- Time travel
+- Scalable metadata handling
+
+Common operations:
+
+OPTIMIZE table_name
+ZORDER BY (column)
+
+OPTIMIZE compacts small files into larger ones.
+
+ZORDER improves query performance by colocating related data in the same files.
+
+Example:
+OPTIMIZE sales
+ZORDER BY (customer_id)
+
+Delta Lake also supports:
+- MERGE
+- DELETE
+- UPDATE
+- VACUUM
+
+VACUUM removes old files no longer needed for time travel.

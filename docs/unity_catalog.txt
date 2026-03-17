@@ -1,0 +1,27 @@
+Unity Catalog is the governance layer for Databricks.
+
+It provides centralized control over data access and metadata.
+
+Hierarchy:
+
+Catalog
+  Schema
+    Table
+
+Example:
+
+catalog.sales.transactions
+
+Key features:
+- Fine-grained access control
+- Data lineage
+- Centralized governance
+- Audit logs
+
+Commands:
+
+SHOW CATALOGS
+SHOW SCHEMAS IN catalog
+SHOW TABLES IN catalog.schema
+
+DESCRIBE TABLE catalog.schema.table
