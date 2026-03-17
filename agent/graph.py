@@ -11,7 +11,7 @@ def route_tools(state):
     return END
 
 
-def build_agent():
+def build_agent(checkpointer = None):
     builder = StateGraph(AgentState)
     builder.add_node("router", router_node)
     builder.add_node("retrieve", retrieval_node)
@@ -25,7 +25,8 @@ def build_agent():
         {
             'rag' : 'retrieve',
             'sql' : 'retrieve',
-            'chat' : 'llm'
+            'chat' : 'llm',
+            'github' : 'llm'
         }
     )
     builder.add_edge("retrieve", "llm")
@@ -34,4 +35,4 @@ def build_agent():
 
     builder.add_edge("tools", "llm")
     
-    return builder.compile()
+    return builder.compile(checkpointer=checkpointer)

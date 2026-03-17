@@ -9,3 +9,5 @@ tiktoken
 langchain-community
 langsmith
 duckdb
+mcp
+langchain-mcp-adapters

@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     azure_openai_api_version: str
     azure_openai_embedding_deployment: str
     azure_openai_embedding_endpoint : str
+    GITHUB_TOKEN : str
     LANGCHAIN_TRACING_V2: Optional[str] = None
     LANGCHAIN_API_KEY: Optional[str] = None
     LANGCHAIN_PROJECT: Optional[str] = None
